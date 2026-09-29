@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QRInator</title>
+    <base href="/" />
+    <link href="_framework/dotnet.1ja3vc5hmo.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-DRcQVywGUcATxUUgvmgxZwfK7BdNMOWe42bcZmGrG1Q=" />
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="QRInator.styles.css" rel="stylesheet" />
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <script type="importmap">{
+  "imports": {
+    "./_content/Toolbelt.Blazor.PWA.Updater.Service/script.min.js": "./_content/Toolbelt.Blazor.PWA.Updater.Service/script.min.pg6ejz0ow9.js",
+    "./_framework/Microsoft.DotNet.HotReload.WebAssembly.Browser.lib.module.js": "./_framework/Microsoft.DotNet.HotReload.WebAssembly.Browser.vdkv1jewps.lib.module.js",
+    "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.1ja3vc5hmo.js",
+    "./_framework/dotnet.native.js": "./_framework/dotnet.native.b6l13xorvf.js",
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.v06hirbjsv.js",
+    "./js/qrCodeInterop.js": "./js/qrCodeInterop.eua18ey5q9.js",
+    "./lib/bootstrap/dist/js/bootstrap.bundle.js": "./lib/bootstrap/dist/js/bootstrap.bundle.4p49wz2veh.js",
+    "./lib/bootstrap/dist/js/bootstrap.bundle.min.js": "./lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js",
+    "./lib/bootstrap/dist/js/bootstrap.esm.js": "./lib/bootstrap/dist/js/bootstrap.esm.5ybjxcllts.js",
+    "./lib/bootstrap/dist/js/bootstrap.esm.min.js": "./lib/bootstrap/dist/js/bootstrap.esm.min.jj8uyg4cgr.js",
+    "./lib/bootstrap/dist/js/bootstrap.min.js": "./lib/bootstrap/dist/js/bootstrap.min.63fj8s7r0e.js",
+    "./lib/bootstrap/dist/js/bootstrap.js": "./lib/bootstrap/dist/js/bootstrap.wj0k6e9sbl.js"
+  },
+  "scopes": {},
+  "integrity": {
+    "./_content/Toolbelt.Blazor.PWA.Updater.Service/script.min.js": "sha256-x4hAHFuJ3tW/7yWCtqmsEpNxjFRKmBqhgcfFDp/2GMc=",
+    "./_content/Toolbelt.Blazor.PWA.Updater.Service/script.min.pg6ejz0ow9.js": "sha256-x4hAHFuJ3tW/7yWCtqmsEpNxjFRKmBqhgcfFDp/2GMc=",
+    "./_framework/Microsoft.DotNet.HotReload.WebAssembly.Browser.lib.module.js": "sha256-8yWuHq7n8AYAqkjYlne8u6Jx371cqsaCnga8ZVQ/Qc4=",
+    "./_framework/Microsoft.DotNet.HotReload.WebAssembly.Browser.vdkv1jewps.lib.module.js": "sha256-8yWuHq7n8AYAqkjYlne8u6Jx371cqsaCnga8ZVQ/Qc4=",
+    "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/dotnet.1ja3vc5hmo.js": "sha256-DRcQVywGUcATxUUgvmgxZwfK7BdNMOWe42bcZmGrG1Q=",
+    "./_framework/dotnet.js": "sha256-DRcQVywGUcATxUUgvmgxZwfK7BdNMOWe42bcZmGrG1Q=",
+    "./_framework/dotnet.native.b6l13xorvf.js": "sha256-jZddobLBM2C3lQhYQ61xSQJ/WqD3eQCO3RzoHGaOjx0=",
+    "./_framework/dotnet.native.js": "sha256-jZddobLBM2C3lQhYQ61xSQJ/WqD3eQCO3RzoHGaOjx0=",
+    "./_framework/dotnet.runtime.js": "sha256-QbnqrZGHtGq7wudS17/AYEPpH9JkphrsyVllD6JHmds=",
+    "./_framework/dotnet.runtime.v06hirbjsv.js": "sha256-QbnqrZGHtGq7wudS17/AYEPpH9JkphrsyVllD6JHmds=",
+    "./js/qrCodeInterop.eua18ey5q9.js": "sha256-Jk04xm5Re/JqUHoCEHQeutbZYuzRWMPCuVkF9dRiea0=",
+    "./js/qrCodeInterop.js": "sha256-Jk04xm5Re/JqUHoCEHQeutbZYuzRWMPCuVkF9dRiea0=",
+    "./lib/bootstrap/dist/js/bootstrap.bundle.4p49wz2veh.js": "sha256-COxowRGjY4FgAJ5UjlMVVPxgRTiDR2m4imT6FQFvCAw=",
+    "./lib/bootstrap/dist/js/bootstrap.bundle.js": "sha256-COxowRGjY4FgAJ5UjlMVVPxgRTiDR2m4imT6FQFvCAw=",
+    "./lib/bootstrap/dist/js/bootstrap.bundle.min.493y06b0oq.js": "sha256-CDOy6cOibCWEdsRiZuaHf8dSGGJRYuBGC+mjoJimHGw=",
+    "./lib/bootstrap/dist/js/bootstrap.bundle.min.js": "sha256-CDOy6cOibCWEdsRiZuaHf8dSGGJRYuBGC+mjoJimHGw=",
+    "./lib/bootstrap/dist/js/bootstrap.esm.5ybjxcllts.js": "sha256-PcRfivDmKHlpxSU2iRHdtGGW50OOw7BOSBd7O2aWgyk=",
+    "./lib/bootstrap/dist/js/bootstrap.esm.js": "sha256-PcRfivDmKHlpxSU2iRHdtGGW50OOw7BOSBd7O2aWgyk=",
+    "./lib/bootstrap/dist/js/bootstrap.esm.min.jj8uyg4cgr.js": "sha256-QZdFT1ZNdly4rmgUBtXmXFS9BU1FTa+sPe6h794sFRQ=",
+    "./lib/bootstrap/dist/js/bootstrap.esm.min.js": "sha256-QZdFT1ZNdly4rmgUBtXmXFS9BU1FTa+sPe6h794sFRQ=",
+    "./lib/bootstrap/dist/js/bootstrap.js": "sha256-zI3iTpyHs0oGTBIFnF8DZE+spURjZKSgN0FbETJvKwE=",
+    "./lib/bootstrap/dist/js/bootstrap.min.63fj8s7r0e.js": "sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=",
+    "./lib/bootstrap/dist/js/bootstrap.min.js": "sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=",
+    "./lib/bootstrap/dist/js/bootstrap.wj0k6e9sbl.js": "sha256-zI3iTpyHs0oGTBIFnF8DZE+spURjZKSgN0FbETJvKwE="
+  }
+}</script>
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+    <script src="_framework/blazor.webassembly.w3qd1tpl0e.js"></script>
+    <script src="_content/Toolbelt.Blazor.PWA.Updater.Service/script.min.js"></script>
+</body>
+
+</html>
