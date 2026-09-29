@@ -1,0 +1,150 @@
+﻿@page "/"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<PageTitle>QRInator – QR Code Generator</PageTitle>
+
+<div class="qrinator-container">
+    <header class="qrinator-header">
+        <h1>QRInator</h1>
+        <p class="lead">Generate high-quality QR codes instantly in your browser.</p>
+    </header>
+
+    <div class="qrinator-card">
+        <div class="qrinator-controls">
+            <div class="mb-3">
+                <label for="qrText" class="form-label fw-semibold">Text or URL</label>
+                <textarea id="qrText" class="form-control" rows="3"
+                          placeholder="Enter text or a URL…"
+                          value="@inputText"
+                          @oninput="OnTextChanged" />
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-sm-6">
+                    <label for="darkColor" class="form-label fw-semibold">Foreground colour</label>
+                    <div class="input-group">
+                        <input type="color" id="darkColor" class="form-control form-control-color"
+                               value="@darkColor"
+                               @oninput="OnDarkColorChanged" />
+                        <span class="input-group-text">@darkColor</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="lightColor" class="form-label fw-semibold">Background colour</label>
+                    <div class="input-group">
+                        <input type="color" id="lightColor" class="form-control form-control-color"
+                               value="@lightColor"
+                               @oninput="OnLightColorChanged" />
+                        <span class="input-group-text">@lightColor</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="previewSize" class="form-label fw-semibold">
+                    Preview size: <strong>@previewSize px</strong>
+                </label>
+                <input type="range" id="previewSize" class="form-range"
+                       min="150" max="500" step="10"
+                       value="@previewSize"
+                       @oninput="OnSizeChanged" />
+            </div>
+
+            <div class="mb-3">
+                <label for="exportSize" class="form-label fw-semibold">Export resolution</label>
+                <select id="exportSize" class="form-select" @bind="exportSize">
+                    <option value="512">512 × 512 px</option>
+                    <option value="1024" selected>1024 × 1024 px</option>
+                    <option value="2048">2048 × 2048 px</option>
+                    <option value="4096">4096 × 4096 px</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="qrinator-preview">
+            @if (!string.IsNullOrWhiteSpace(inputText))
+            {
+                <canvas id="@CanvasId" class="qr-canvas" style="width:@(previewSize)px;height:@(previewSize)px;" />
+                <div class="qrinator-actions mt-3">
+                    <button class="btn btn-primary" @onclick="DownloadQR">
+                        ⬇ Download PNG (@exportSize px)
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="qr-placeholder">
+                    <span>Your QR code will appear here</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private const string CanvasId = "qr-canvas";
+
+    private string inputText  = string.Empty;
+    private string darkColor  = "#000000";
+    private string lightColor = "#ffffff";
+    private int    previewSize = 300;
+    private int    exportSize  = 1024;
+
+    private IJSObjectReference? _jsModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "./js/qrCodeInterop.js");
+        }
+    }
+
+    private async Task RenderQR()
+    {
+        if (_jsModule is null || string.IsNullOrWhiteSpace(inputText)) return;
+        await _jsModule.InvokeVoidAsync("generateQR",
+            CanvasId, inputText, previewSize, darkColor, lightColor);
+    }
+
+    private async Task OnTextChanged(ChangeEventArgs e)
+    {
+        inputText = e.Value?.ToString() ?? string.Empty;
+        await RenderQR();
+    }
+
+    private async Task OnDarkColorChanged(ChangeEventArgs e)
+    {
+        darkColor = e.Value?.ToString() ?? "#000000";
+        await RenderQR();
+    }
+
+    private async Task OnLightColorChanged(ChangeEventArgs e)
+    {
+        lightColor = e.Value?.ToString() ?? "#ffffff";
+        await RenderQR();
+    }
+
+    private async Task OnSizeChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var sz))
+            previewSize = sz;
+        await RenderQR();
+    }
+
+    private async Task DownloadQR()
+    {
+        if (_jsModule is null || string.IsNullOrWhiteSpace(inputText)) return;
+        var filename = $"qrcode-{DateTime.Now:yyyyMMdd-HHmmss}.png";
+        await _jsModule.InvokeVoidAsync("downloadQR",
+            CanvasId, inputText, exportSize, darkColor, lightColor, filename);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule is not null)
+            await _jsModule.DisposeAsync();
+    }
+}
